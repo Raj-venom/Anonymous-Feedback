@@ -19,11 +19,12 @@ export async function POST(request: Request) {
         )
     }
     const userId = user._id
+    const { acceptMessages } = await request.json();
 
     try {
 
         const updatedUser = await UserModel.findByIdAndUpdate(userId, {
-            isAcceptingMessages: !user?.isAcceptingMessages
+            isAcceptingMessages: acceptMessages
         }, { new: true })
 
         if (!updatedUser) {
@@ -71,8 +72,12 @@ export async function GET(request: Request) {
         }
 
         return Response.json(
-            new ApiResponse(200, { isAcceptingMessages: resUser.isAcceptingMessages }, "User fetched sucessfully")
-        )
+            {
+                success: true,
+                isAcceptingMessages: resUser.isAcceptingMessages,
+            },
+            { status: 200 }
+        );
 
 
     } catch (error) {
