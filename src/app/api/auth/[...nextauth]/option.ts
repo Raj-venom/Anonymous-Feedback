@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
-            id: "Credentials",
+            id: "credentials",
             name: "Credentials",
 
             // `credentials` is used to generate a form on the sign in page.
@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
             },
 
             async authorize(credentials: any): Promise<any> {
-                dbConnect()
+              await  dbConnect()
                 // Add logic here to look up the user from the credentials supplied
                 try {
                     const user = await UserModel.findOne({
