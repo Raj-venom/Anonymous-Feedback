@@ -147,9 +147,9 @@ function page() {
   return (
     <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto bg-gray-800 rounded-xl shadow-xl p-8">
-            <h1 className="text-4xl font-bold mb-8 text-white">User Dashboard</h1>
+            <h1 className="text-4xl font-bold mb-2 text-white">User Dashboard</h1>
 
-            <div className="mb-8 bg-gray-750 p-6 rounded-lg shadow">
+            <div className=" bg-gray-750 py-2 rounded-lg shadow">
                 <h2 className="text-2xl font-semibold mb-4 text-green-400">Copy Your Unique Link</h2>
                 <div className="flex items-center space-x-4">
                     <input
@@ -162,7 +162,7 @@ function page() {
                 </div>
             </div>
 
-            <div className='mb-8 flex items-center space-x-4 bg-gray-750 p-6 rounded-lg shadow'>
+            <div className=' flex items-center space-x-4 bg-gray-750 py-4  rounded-lg shadow'>
                 <Switch
                     {...register('acceptMessages')}
                     checked={acceptMessages}
@@ -174,10 +174,10 @@ function page() {
                 </span>
             </div>
 
-            <Separator className="my-8 bg-gray-700" />
+            <Separator className="my-4 bg-gray-700" />
 
             <Button
-                className="mb-8 bg-green-600 hover:bg-green-700 text-white transition duration-300"
+                className="mb-4 bg-green-600 hover:bg-green-700 text-white transition duration-300"
                 variant="outline"
                 onClick={(e) => {
                     e.preventDefault();
