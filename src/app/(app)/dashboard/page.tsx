@@ -58,7 +58,7 @@ function page() {
     } finally {
       setIsSwitchLoading(false);
     }
-  }, [setValue]);
+  }, [setValue, toast]);
 
 
   const fetchMessages = useCallback(
@@ -67,6 +67,7 @@ function page() {
       setIsSwitchLoading(true)
       try {
         const response = await axios.get<ApiResponse>('/api/get-messages')
+        console.log(response.data.messages, "messages")
         setMessages(response.data.messages || [])
 
         if (refresh) {
@@ -90,7 +91,7 @@ function page() {
         setIsSwitchLoading(false);
       }
 
-    }, [setIsLoading, setMessages]);
+    }, [setIsLoading, setMessages, toast]);
 
 
 
@@ -100,7 +101,7 @@ function page() {
     fetchMessages();
     fetchAcceptMessages();
 
-  }, [session, setValue, fetchMessages, fetchAcceptMessages])
+  }, [session, setValue, fetchMessages, fetchAcceptMessages, toast])
 
   const handleSwitchChange = async () => {
     try {

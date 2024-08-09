@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import { authOptions } from "../api/auth/[...nextauth]/option";
+import { authOptions } from "../auth/[...nextauth]/option";
 import { getServerSession } from "next-auth/next";
 import { User } from "next-auth";
 import { ApiResponse } from "@/helpers/ApiResponse";
@@ -46,10 +46,13 @@ export async function GET(request: Request) {
             )
         }
 
+
         return Response.json(
-            new ApiResponse(200, { message: user[0].messages }, 'Message fetched sucessfully'),
-            { status: 200 }
-        )
+            { messages: user[0].messages },
+            {
+                status: 200,
+            }
+        );
 
     } catch (error) {
         console.error('An unexpected error occurred:', error);

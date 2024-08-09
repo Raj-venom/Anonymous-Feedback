@@ -4,7 +4,7 @@ import UserModel, { Message } from "@/model/user.models";
 
 
 export async function POST(request: Request) {
-    dbConnect()
+    await dbConnect()
     const { username, content } = await request.json();
 
     if (!username || !content) {
@@ -23,6 +23,14 @@ export async function POST(request: Request) {
                 { status: 404 }
             )
         }
+
+        if (!user.isAcceptingMessages) {
+            return Response.json(
+                new ApiResponse(400, {}, "User is not accepting messages"),
+                { status: 400 }
+            )
+        }
+
 
         const newMessge = { content, createdAt: new Date() }
 
