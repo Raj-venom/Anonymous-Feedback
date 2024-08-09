@@ -58,41 +58,36 @@ function MessageCard({ message, onMessageDelete }: MessageCardProps) {
     };
 
     return (
-        <Card className="card-bordered">
-            <CardHeader>
+        <Card className="bg-gray-800 text-white shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
+            <CardHeader className="bg-gray-750 rounded-t-lg">
                 <div className="flex justify-between items-center">
-                    <CardTitle>{message.content}</CardTitle>
+                    <CardTitle className="text-lg font-semibold text-green-400">{message.content}</CardTitle>
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
-                            <Button variant="destructive">
+                            <Button variant="destructive" className="bg-red-600 hover:bg-red-700 transition duration-300">
                                 <X className="w-5 h-5" />
                             </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className="bg-gray-800 text-white">
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    This action cannot be undone. This will permanently delete your
-                                    account and remove your data from our servers.
+                                <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+                                <AlertDialogDescription className="text-gray-400">
+                                    Are you sure you want to delete this message? This action cannot be undone.
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-
-                                <AlertDialogAction onClick={handleDeleteConfirm}>Continue</AlertDialogAction>
-
+                                <AlertDialogCancel className="bg-gray-700 text-white hover:bg-gray-600">Cancel</AlertDialogCancel>
+                                <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">Delete</AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>
                 </div>
             </CardHeader>
-            <CardContent>
-                <p>Card Content</p>
+            <CardContent className="mt-4">
+                <p className="text-gray-300">Card Content</p>
             </CardContent>
-
         </Card>
-
-    )
+    );
 }
 
 export default MessageCard

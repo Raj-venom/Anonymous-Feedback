@@ -145,66 +145,68 @@ function page() {
   }
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+    <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto bg-gray-800 rounded-xl shadow-xl p-8">
+            <h1 className="text-4xl font-bold mb-8 text-white">User Dashboard</h1>
 
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
-        <div className="flex items-center">
-          <input
-            type='text'
-            value={profileUrl}
-            disabled
-            className="input input-bordered w-full p-2 mr-2"
-          />
-          <Button onClick={copyToClipboard}>Copy</Button>
+            <div className="mb-8 bg-gray-750 p-6 rounded-lg shadow">
+                <h2 className="text-2xl font-semibold mb-4 text-green-400">Copy Your Unique Link</h2>
+                <div className="flex items-center space-x-4">
+                    <input
+                        type='text'
+                        value={profileUrl}
+                        disabled
+                        className="flex-grow p-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
+                    />
+                    <Button onClick={copyToClipboard} className="bg-green-600 hover:bg-green-700 text-white transition duration-300">Copy</Button>
+                </div>
+            </div>
+
+            <div className='mb-8 flex items-center space-x-4 bg-gray-750 p-6 rounded-lg shadow'>
+                <Switch
+                    {...register('acceptMessages')}
+                    checked={acceptMessages}
+                    onCheckedChange={handleSwitchChange}
+                    disabled={isSwitchLoading}
+                />
+                <span className="text-lg font-medium text-gray-300">
+                    Accept Messages: {acceptMessages ? 'On' : 'Off'}
+                </span>
+            </div>
+
+            <Separator className="my-8 bg-gray-700" />
+
+            <Button
+                className="mb-8 bg-green-600 hover:bg-green-700 text-white transition duration-300"
+                variant="outline"
+                onClick={(e) => {
+                    e.preventDefault();
+                    fetchMessages(true);
+                }}
+            >
+                {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                    <RefreshCcw className="h-4 w-4" />
+                )}
+            </Button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {messages.length > 0 ? (
+                    messages.map((message, index) => (
+                        <MessageCard
+                            key={index}
+                            message={message}
+                            onMessageDelete={handleDeleteMessage}
+                        />
+                    ))
+                ) : (
+                    <p className="text-gray-400 text-center col-span-2">No messages to display.</p>
+                )}
+            </div>
         </div>
-      </div>
-      <div className='mb-4'>
-        <Switch
-          {...register('acceptMessages')}
-          checked={acceptMessages}
-          onCheckedChange={handleSwitchChange}
-          disabled={isSwitchLoading}
-        />
-        <span className="ml-2">
-          Accept Messages: {acceptMessages ? 'On' : 'Off'}
-        </span>
-      </div>
-      <Separator />
-
-      <Button
-        className="mt-4"
-        variant="outline"
-        onClick={(e) => {
-          e.preventDefault();
-          fetchMessages(true);
-        }}
-      >
-        {isLoading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <RefreshCcw className="h-4 w-4" />
-        )}
-      </Button>
-
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {messages.length > 0 ? (
-          messages.map((message, index) => (
-            <MessageCard
-              key={index}
-              message={message}
-              onMessageDelete={handleDeleteMessage}
-            />
-          ))
-        ) : (
-          <p>No messages to display.</p>
-        )}
-      </div>
-
-    </div >
-
-  )
+    </div>
+);
 }
 
 export default page

@@ -12,25 +12,29 @@ function Navbar() {
     const user: User = session?.user as User;
 
     return (
-        <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
-            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-                <a href="#" className="text-xl font-bold mb-4 md:mb-0">
-                    True Feedback
-                </a>
-                {session ? (
-                    <>
-                        <span className="mr-4">
-                            Welcome, {user.username || user.email}
-                        </span>
-                        <Button onClick={() => signOut()} className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>
-                            Logout
-                        </Button>
-                    </>
-                ) : (
-                    <Link href="/sign-in">
-                        <Button className="w-full md:w-auto bg-slate-100 text-black" variant={'outline'}>Login</Button>
-                    </Link>
-                )}
+        <nav className="bg-gray-800 text-white shadow-lg">
+            <div className="container mx-auto px-6 py-4">
+                <div className="flex justify-between items-center">
+                    <a href="#" className="text-2xl font-bold tracking-tight hover:text-gray-300 transition duration-300">
+                        True Feedback
+                    </a>
+                    <div className="flex items-center space-x-4">
+                        {session ? (
+                            <>
+                                <span className="text-lg font-medium bg-gray-800 px-3 py-1 rounded-full">
+                                  Welcome, {user.username || user.email}
+                                </span>
+                                <Button onClick={() => signOut()} className="bg-red-600 hover:bg-red-700 text-white transition duration-300" variant='default'>
+                                    Logout
+                                </Button>
+                            </>
+                        ) : (
+                            <Link href="/sign-in">
+                                <Button className="bg-green-600 hover:bg-green-700 text-white transition duration-300" variant={'default'}>Login</Button>
+                            </Link>
+                        )}
+                    </div>
+                </div>
             </div>
         </nav>
     );

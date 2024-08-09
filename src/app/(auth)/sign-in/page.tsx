@@ -57,62 +57,64 @@ function page() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Welcome Back to True Feedback
-          </h1>
-          <p className="mb-4">Sign in to continue your secret conversations</p>
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8 bg-gray-800 p-10 rounded-xl shadow-2xl">
+            <div className="text-center">
+                <h1 className="text-4xl font-extrabold text-white mb-2">
+                    Welcome Back to True Feedback
+                </h1>
+                <p className="text-gray-400 mb-8">Sign in to continue your secret conversations</p>
+            </div>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                        name="identifier"
+                        control={form.control}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-gray-300">Email</FormLabel>
+                                <Input
+                                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-green-500"
+                                    {...field}
+                                />
+                                <FormMessage className="text-red-400" />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        name="password"
+                        control={form.control}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-gray-300">Password</FormLabel>
+                                <Input
+                                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-green-500"
+                                    type="password"
+                                    placeholder="password"
+                                    {...field}
+                                />
+                                <FormMessage className="text-red-400" />
+                            </FormItem>
+                        )}
+                    />
+
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        Sign In
+                    </Button>
+                </form>
+            </Form>
+            <div className="text-center mt-4">
+                <p className="text-gray-400">
+                    Not a member yet?{' '}
+                    <Link href="/sign-up" className="text-green-400 hover:text-green-300 font-medium">
+                        Sign Up
+                    </Link>
+                </p>
+            </div>
         </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-
-            <FormField
-              name="identifier"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    {...field}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              name="password"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <Input
-                    placeholder="password"
-                    {...field}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" className="w-full" >
-              Sign In
-            </Button>
-          </form>
-        </Form>
-        <div>
-          <p>
-            Not a member yet?{' '}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-              Sign Up
-            </Link>
-          </p>
-        </div>
-      </div>
     </div>
-  )
+);
 
 }
 

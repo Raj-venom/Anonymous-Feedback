@@ -100,13 +100,13 @@ function page() {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-800">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8 bg-gray-800 p-10 rounded-xl shadow-2xl">
                 <div className="text-center">
-                    <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+                    <h1 className="text-4xl font-extrabold text-white mb-2">
                         Join True Feedback
                     </h1>
-                    <p className="mb-4">Sign up to start your anonymous adventure</p>
+                    <p className="text-gray-400 mb-8">Sign up to start your anonymous adventure</p>
                 </div>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -115,61 +115,62 @@ function page() {
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel className="text-gray-300">Username</FormLabel>
                                     <Input
+                                        className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-green-500"
                                         placeholder="username"
                                         {...field}
                                         onChange={e => {
                                             field.onChange(e);
                                             debouncedUsername(e.target.value)
                                         }}
-
                                     />
-                                    {isCheckingUsername && <Loader2 className="animate-spin" />}
+                                    {isCheckingUsername && <Loader2 className="animate-spin text-green-500" />}
                                     {!isCheckingUsername && usernameMessage && (
-                                        <p
-                                            className={`text-sm ${usernameMessage.includes("Username is unique") ? "text-blue-500" : "text-red-500"}`}
-                                        >
+                                        <p className={`text-sm ${usernameMessage.includes("Username is unique") ? "text-green-400" : "text-red-400"}`}>
                                             {usernameMessage}
                                         </p>
                                     )}
-                                    <FormMessage />
+                                    <FormMessage className="text-red-400" />
                                 </FormItem>
                             )}
                         />
-
+    
                         <FormField
                             name="email"
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className="text-gray-300">Email</FormLabel>
                                     <Input
+                                        className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-green-500"
                                         placeholder="email"
                                         {...field}
                                     />
-                                    <p className='text-muted text-gray-400 text-sm'>We will send you a verification code</p>
-                                    <FormMessage />
+                                    <p className='text-gray-400 text-sm'>We'll send you a verification code</p>
+                                    <FormMessage className="text-red-400" />
                                 </FormItem>
                             )}
                         />
-
+    
                         <FormField
                             name="password"
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel className="text-gray-300">Password</FormLabel>
                                     <Input
+                                        className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-green-500"
                                         placeholder="password"
+                                        type="password"
                                         {...field}
                                     />
-                                    <FormMessage />
+                                    <FormMessage className="text-red-400" />
                                 </FormItem>
                             )}
                         />
-
-                        <Button type="submit" className="w-full" disabled={isSubmitting}>
+    
+                        <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300" disabled={isSubmitting}>
                             {isSubmitting ? (
                                 <>
                                     <Loader2 className="animate-spin mr-2 h-4 w-4" />
@@ -181,17 +182,17 @@ function page() {
                         </Button>
                     </form>
                 </Form>
-                <div>
-                    <p>
+                <div className="text-center mt-4">
+                    <p className="text-gray-400">
                         Already have an account?{" "}
-                        <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
+                        <Link href="/sign-in" className="text-green-400 hover:text-green-300 font-medium">
                             Sign in
                         </Link>
                     </p>
                 </div>
             </div>
         </div>
-    )
+    );
 
 }
 
