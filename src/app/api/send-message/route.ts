@@ -6,6 +6,7 @@ import UserModel, { Message } from "@/model/user.models";
 export async function POST(request: Request) {
     await dbConnect()
     const { username, content } = await request.json();
+    console.log('username:', username)
 
     if (!username || !content) {
         return Response.json(
@@ -19,14 +20,14 @@ export async function POST(request: Request) {
 
         if (!user) {
             return Response.json(
-                new ApiResponse(404, {}, "User not found"),
+                { message: 'User not found', success: false },
                 { status: 404 }
             )
         }
 
         if (!user.isAcceptingMessages) {
             return Response.json(
-                new ApiResponse(400, {}, "User is not accepting messages"),
+                { message: 'User is not accepting messages', success: false },
                 { status: 400 }
             )
         }
@@ -39,13 +40,13 @@ export async function POST(request: Request) {
 
         if (!savedUser) {
             return Response.json(
-                new ApiResponse(500, {}, "Failed to send user message"),
+                { message: 'Failed to send user message', success: true },
                 { status: 500 }
             )
         }
 
         return Response.json(
-            new ApiResponse(200, {}, "Message send sucessfully"),
+            { message: 'Message sent successfully', success: true },
             { status: 200 }
         )
 
