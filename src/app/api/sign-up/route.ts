@@ -64,10 +64,10 @@ export async function POST(request: Request) {
         const emailResponse = await sendVerificationEmail(email, username, verifyCode)
 
         if (!emailResponse.success) {
-            console.log("not email")
+            // console.log("not email")
             return Response.json({ message: emailResponse.message, sucess: false }, { status: 400 })
         }
-        console.log("email",emailResponse.success)
+        // console.log("email",emailResponse.success)
 
         return Response.json({ message: "User Register sucessfully. Please verify your account", sucess: true }, { status: 200 })
 

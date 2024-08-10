@@ -42,7 +42,7 @@ function page() {
 
     try {
       const response = await axios.get<ApiResponse>('/api/accept-messages')
-      console.log(response.data.isAcceptingMessages, "value dashboard")
+      // console.log(response.data.isAcceptingMessages, "value dashboard")
       //  it will initially set when use effect runs
       setValue("acceptMessages", response.data.isAcceptingMessages)
 
@@ -67,7 +67,7 @@ function page() {
       setIsSwitchLoading(true)
       try {
         const response = await axios.get<ApiResponse>('/api/get-messages')
-        console.log(response.data.messages, "messages")
+        // console.log(response.data.messages, "messages")
         setMessages(response.data.messages || [])
 
         if (refresh) {

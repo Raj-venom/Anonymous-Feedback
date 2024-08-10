@@ -39,7 +39,7 @@ function page() {
       password: data.password
     })
 
-    console.log(result, "result")
+    // console.log(result, "result")
 
     if (result?.error) {
       toast({
@@ -50,7 +50,7 @@ function page() {
     }
 
     if (result?.url) {
-      console.log(result.ok, "result.ok")
+    //   console.log(result.ok, "result.ok")
       router.replace("/dashboard")
     }
 

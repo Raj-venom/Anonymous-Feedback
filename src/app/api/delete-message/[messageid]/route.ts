@@ -40,7 +40,7 @@ export async function DELETE(request: Request, { params }: { params: { messageid
         )
 
     } catch (error) {
-        console.log('Error deleting message', error)
+        // console.log('Error deleting message', error)
         return Response.json(
             { success: false, message: 'Error deleting message' },
             { status: 500 }

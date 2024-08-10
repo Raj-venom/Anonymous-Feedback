@@ -38,6 +38,17 @@ function MessageCard({ message, onMessageDelete }: MessageCardProps) {
 
     const { toast } = useToast();
 
+    const date = new Date(message.createdAt);
+    const options: Intl.DateTimeFormatOptions = {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    };
+    const formattedDate = date.toLocaleString('en-US', options).replace(',', '');
+
     const handleDeleteConfirm = async () => {
         try {
             const response = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
@@ -84,7 +95,7 @@ function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                 </div>
             </CardHeader>
             <CardContent className="mt-4">
-                <p className="text-gray-300">Card Content</p>
+                <p className="text-gray-300">{formattedDate}</p>
             </CardContent>
         </Card>
     );

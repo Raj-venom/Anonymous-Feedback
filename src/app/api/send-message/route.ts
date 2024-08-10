@@ -6,7 +6,7 @@ import UserModel, { Message } from "@/model/user.models";
 export async function POST(request: Request) {
     await dbConnect()
     const { username, content } = await request.json();
-    console.log('username:', username)
+    // console.log('username:', username)
 
     if (!username || !content) {
         return Response.json(
